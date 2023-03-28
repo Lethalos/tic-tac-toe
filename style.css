@@ -22,6 +22,28 @@ header {
   align-items: center;
 }
 
+button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-time);
+}
+
+button:hover {
+  background-color: #fff;
+  color: #333;
+}
+button:active {
+  transform: scale(0.9);
+}
+
+button:focus {
+  outline: none;
+}
+
 .players {
   font-size: 2rem;
   padding: 2rem 0rem;
@@ -37,32 +59,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 
 .players button {
-  padding: 1.25rem 2.5rem;
-  margin: 0.5rem;
-  border: none;
-  border-radius: 0.25rem;
-  background-color: #333;
-  color: #fff;
+  width: 100px;
+  height: 100px;
   font-size: 2rem;
-  cursor: pointer;
-  user-select: none;
-  transition: all var(--transition-time);
-}
-
-.players button:hover {
-  background-color: #fff;
-  color: #333;
-}
-
-.players button:active {
-  transform: scale(0.9);
-}
-
-.players button:focus {
-  outline: none;
+  font-weight: bold;
 }
 
 .game {
@@ -76,26 +80,6 @@ header {
 .game .start {
   font-size: 1.25rem;
   padding: 1rem 0.5rem;
-  border: none;
-  border-radius: 0.25rem;
-  background-color: #333;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-  transition: all var(--transition-time);
-}
-
-.game .start:hover {
-  background-color: #fff;
-  color: #333;
-}
-
-.game .start:active {
-  transform: scale(0.9);
-}
-
-.game .start:focus {
-  outline: none;
 }
 
 .game .board {
@@ -107,6 +91,38 @@ header {
   width: 100px;
   height: 100px;
   background-color: #fff;
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: bold;
   border: 1px solid #333;
   border-radius: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-time);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game .board .cell:hover {
+  background-color: #717171;
+  color: #fff;
+}
+
+.game-status {
+  background-color: #717171;
+  margin-top: 2rem;
+  padding: 1rem 0rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.game-status button {
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
 }

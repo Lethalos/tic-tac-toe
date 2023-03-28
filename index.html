@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <header>
@@ -28,6 +29,8 @@
       <button class="start">Start Game</button>
 
       <div class="board">
+        <div class="cell">X</div>
+        <div class="cell">O</div>
         <div class="cell"></div>
         <div class="cell"></div>
         <div class="cell"></div>
@@ -35,8 +38,16 @@
         <div class="cell"></div>
         <div class="cell"></div>
         <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
+      </div>
+    </section>
+
+    <section class="game-status">
+      <div class="status-text">
+        <div class="turn-text">It's -'s turn</div>
+        <div class="winner-text">Winner: -</div>
+      </div>
+      <div class="status-buttons">
+        <button class="reset">Reset</button>
       </div>
     </section>
   </body>
