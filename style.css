@@ -44,6 +44,13 @@ button:focus {
   outline: none;
 }
 
+button:disabled {
+  opacity: 0.5;
+  background-color: #717171;
+  color: #fff;
+  cursor: not-allowed;
+}
+
 .players {
   font-size: 2rem;
   padding: 2rem 0rem;
@@ -55,7 +62,7 @@ button:focus {
   gap: 2rem;
 }
 
-.players .buttons {
+.players .player-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,9 +84,10 @@ button:focus {
   gap: 2rem;
 }
 
-.game .start {
+.game .reset {
+  width: 100px;
+  height: 70px;
   font-size: 1.25rem;
-  padding: 1rem 0.5rem;
 }
 
 .game .board {
@@ -110,19 +118,21 @@ button:focus {
   color: #fff;
 }
 
+.game .board .cell.disabled {
+  opacity: 0.5;
+  background-color: #717171;
+  color: #fff;
+  cursor: not-allowed;
+}
+
 .game-status {
   background-color: #717171;
   margin-top: 2rem;
   padding: 1rem 0rem;
+  font-size: 1.25rem;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-}
-
-.game-status button {
-  font-size: 1.25rem;
-  padding: 0.5rem 1rem;
 }
