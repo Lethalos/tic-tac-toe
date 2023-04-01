@@ -7,9 +7,14 @@
 body {
   --transition-time: 0.5s;
 
+  height: 100vh;
   font-family: "Roboto", sans-serif;
   background-color: #1e1e1e;
   color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 header {
@@ -53,13 +58,12 @@ button:disabled {
 
 .players {
   font-size: 2rem;
-  padding: 2rem 0rem;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .players .player-buttons {
@@ -76,6 +80,19 @@ button:disabled {
   font-weight: bold;
 }
 
+.game-status {
+  align-self: center;
+  background-color: #717171;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .game {
   display: flex;
   flex-direction: column;
@@ -84,7 +101,7 @@ button:disabled {
   gap: 2rem;
 }
 
-.game .reset {
+.game .reset-button {
   width: 100px;
   height: 70px;
   font-size: 1.25rem;
@@ -123,16 +140,4 @@ button:disabled {
   background-color: #717171;
   color: #fff;
   cursor: not-allowed;
-}
-
-.game-status {
-  background-color: #717171;
-  margin-top: 2rem;
-  padding: 1rem 0rem;
-  font-size: 1.25rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }

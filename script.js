@@ -7,6 +7,74 @@ const gameManager = (() => {
     isFinished: false,
   };
 
+  const playerButtons = [
+    document.querySelector(".player-x"),
+    document.querySelector(".player-o"),
+  ];
+
+  const resetButton = document.querySelector(".reset-button");
+
+  const startGame = () => {
+    gameBoard.disableBoard();
+    disableResetButton();
+    playerButtons.forEach((button) => {
+      button.addEventListener("click", initGame);
+    });
+  };
+
+  const disablePlayerButtons = () => {
+    playerButtons.forEach((button) => {
+      button.disabled = true;
+      button.removeEventListener("click", initGame);
+    });
+  };
+
+  const enablePlayerButtons = () => {
+    playerButtons.forEach((button) => {
+      button.disabled = false;
+      button.addEventListener("click", initGame);
+    });
+  };
+
+  const disableResetButton = () => {
+    resetButton.disabled = true;
+    resetButton.removeEventListener("click", resetGame);
+  };
+
+  const enableResetButton = () => {
+    resetButton.disabled = false;
+    resetButton.addEventListener("click", resetGame);
+  };
+
+  const initGame = () => {
+    gameStatus.isFinished = false;
+    gameBoard.cleanBoard();
+    gameBoard.enableBoard();
+    setCurrentPlayer(player1);
+    updateTurnText(getCurrentPlayer());
+    updateWinnerText("-");
+    enableResetButton();
+    disablePlayerButtons();
+  };
+
+  const resetGame = () => {
+    gameStatus.isFinished = false;
+    gameBoard.cleanBoard();
+    gameBoard.disableBoard();
+    updateTurnText("-");
+    updateWinnerText("-");
+    disableResetButton();
+    enablePlayerButtons();
+  };
+
+  const finishGame = () => {
+    gameStatus.isFinished = true;
+    gameBoard.disableBoard();
+    updateWinnerText(currentPlayer);
+    disableResetButton();
+    enablePlayerButtons();
+  };
+
   const setCurrentPlayer = (player) => {
     currentPlayer = player;
   };
@@ -39,11 +107,12 @@ const gameManager = (() => {
 
   return {
     gameStatus,
+    startGame,
+    finishGame,
     setCurrentPlayer,
     getCurrentPlayer,
     changeCurrentPlayer,
     updateTurnText,
-    updateWinnerText,
   };
 })();
 
@@ -121,14 +190,6 @@ const gameBoard = (() => {
     return false;
   };
 
-  const disableBoard = () => {
-    console.log("game finished");
-    cells.forEach((cell) => {
-      cell.removeEventListener("click", cellHandler);
-      cell.classList.toggle("disabled");
-    });
-  };
-
   const cellHandler = (event) => {
     let currentPlayer = gameManager.getCurrentPlayer();
 
@@ -136,9 +197,7 @@ const gameBoard = (() => {
       putX(event.target);
 
       if (isGameFinished()) {
-        gameManager.updateWinnerText(currentPlayer);
-        gameManager.gameStatus.isFinished = true;
-        disableBoard();
+        gameManager.finishGame();
       }
 
       gameManager.changeCurrentPlayer();
@@ -148,9 +207,7 @@ const gameBoard = (() => {
       putO(event.target);
 
       if (isGameFinished()) {
-        gameManager.updateWinnerText(currentPlayer);
-        gameManager.gameStatus.isFinished = true;
-        disableBoard();
+        gameManager.finishGame();
       }
 
       gameManager.changeCurrentPlayer();
@@ -159,27 +216,27 @@ const gameBoard = (() => {
     }
   };
 
-  const initBoard = () => {
+  const enableBoard = () => {
     cells.forEach((cell) => {
       cell.addEventListener("click", cellHandler);
       cell.classList.remove("disabled");
     });
   };
 
-  return { initBoard };
+  const disableBoard = () => {
+    cells.forEach((cell) => {
+      cell.removeEventListener("click", cellHandler);
+      cell.classList.toggle("disabled");
+    });
+  };
+
+  const cleanBoard = () => {
+    cells.forEach((cell) => {
+      cell.innerText = "";
+    });
+  };
+
+  return { enableBoard, disableBoard, cleanBoard };
 })();
 
-const playerButtons = [
-  document.querySelector(".player-x"),
-  document.querySelector(".player-o"),
-];
-
-playerButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    button.disable = true;
-    gameManager.setCurrentPlayer(button.innerText);
-    gameManager.updateTurnText(gameManager.getCurrentPlayer());
-  });
-});
-
-gameBoard.initBoard();
+gameManager.startGame();
